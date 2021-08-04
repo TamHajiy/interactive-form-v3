@@ -46,7 +46,7 @@ color.disabled = true;
 //make design <select> to listen for user changes
 design.addEventListener('change', (e)=>{
     color.disabled = false;
-    
+
     //iterate through color options
     for(var i=1; i < colorOptions.length; i++){
         if(e.target.value === 'js puns'){
@@ -119,7 +119,9 @@ paymentMethod.addEventListener('change', (e)=>{
 /* A-8/9 Validate Input By User*/ 
 function isNameValid(){
     if (userName.value.trim() === ''){
+        //className is added that will print CSS rules in case if false
         userName.parentNode.className = 'not-valid';
+        //.hide class the lastElementChild of parentNode will be set to  block if false
         userName.parentNode.lastElementChild.style.display = 'block'
         return false;
     } else {
@@ -176,7 +178,6 @@ function isCvvValid(){
         return true;
     }
 }
-//const checkBoxHint = document.getElementById('')
 function isAnyActivityRegistered (){
     if(total === 0){
         totalCost.className = 'not-valid';
@@ -212,7 +213,7 @@ form.addEventListener('submit', (e)=>{
     }
 })
 
-/*Print hint if an input is invalid*/
+/*Focus and blur on input checbox elements*/
 for (i=0; i< inputCheckbox.length; i++){
     inputCheckbox[i].addEventListener('focus', (e) => {
         e.target.parentNode.className = 'focus'
