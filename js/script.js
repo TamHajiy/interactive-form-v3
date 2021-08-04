@@ -12,14 +12,22 @@ const paymentMethod = document.getElementById('payment')
 const paypal = document.getElementById('paypal');
 const bitcoin = document.getElementById('bitcoin');
 const ccBox = document.getElementById('credit-card')
-const defaultCredit = document.querySelector('option[value="credit-card"]')
+const defaultCredit = document.querySelector('option[value="credit-card"]');
+//DOM for input validation
+const form = document.querySelector('form');
+const userName = document.getElementById('name');
+const email = document.getElementById('email');
+const ccnum = document.getElementById('cc-num');
+const zipNum = document.getElementById('zip');
+const cvvNum = document.getElementById('cvv');
+const inputCheckbox=document.querySelectorAll('input[type="checkbox"]') // list of input tags
 
 
-/* Default Focus On Name/Text/Input*/
+/* A-3 Default Focus On Name/Text/Input*/
 document.querySelector("input[name='user-name']").focus();
 
 
-/* Toggle Of 'Other' box based on used selection*/
+/* A-4 Toggle Of 'Other' box based on used selection*/
 //hide other section input box
 hideOtherInput.style.display = 'none'
 // add eventlistener and make 'other' box appear if 'other' option is selected
@@ -32,12 +40,13 @@ addOtherInput.addEventListener('change', (e)=>{
 });
 
 
-/* T-shirt and Color Selection*/
+/* A-5 T-shirt and Color Selection*/
 //disable color <select> element
 color.disabled = true;
 //make design <select> to listen for user changes
 design.addEventListener('change', (e)=>{
     color.disabled = false;
+    
     //iterate through color options
     for(var i=1; i < colorOptions.length; i++){
         if(e.target.value === 'js puns'){
@@ -63,7 +72,7 @@ design.addEventListener('change', (e)=>{
     })//endFunc
 
 
-/* Modify Total Cost Based On User Selection*/
+/* A-6 Modify Total Cost Based On User Selection*/
 //total cost for activities
 let total = 0;
 checkedActivities.addEventListener('change', (e)=>{
@@ -81,7 +90,7 @@ checkedActivities.addEventListener('change', (e)=>{
     }
 });
 
-/* Modify Payment UI Based On User Selection*/
+/* A-7 Modify Payment UI Based On User Selection*/
 //set two payment option as default none 
 paypal.style.display = 'none'
 bitcoin.style.display= 'none'
@@ -107,17 +116,7 @@ paymentMethod.addEventListener('change', (e)=>{
 
 })
 
-/*Validate Input By User*/ 
-const form = document.querySelector('form');
-const userName = document.getElementById('name');
-
-const email = document.getElementById('email');
-const ccnum = document.getElementById('cc-num');
-const zipNum = document.getElementById('zip');
-const cvvNum = document.getElementById('cvv');
-// let nameHint = document.getElementById('name-hint');
-
-
+/* A-8/9 Validate Input By User*/ 
 function isNameValid(){
     if (userName.value.trim() === ''){
         userName.parentNode.className = 'not-valid';
@@ -191,7 +190,7 @@ function isAnyActivityRegistered (){
 }
 
 
-/*Prevent Submition if Required Section are Not Filled */
+/*Prevent Submition if Required Sections are Not Filled */
 form.addEventListener('submit', (e)=>{
     if(!isNameValid()){
         e.preventDefault()
@@ -213,10 +212,20 @@ form.addEventListener('submit', (e)=>{
     }
 })
 
-/*Turn Key Tab On For All The Boxes*/
-// userName.addEventListener('keyup', ()=>{
-//     isNameValid();
-// });
+/*Print hint if an input is invalid*/
+for (i=0; i< inputCheckbox.length; i++){
+    inputCheckbox[i].addEventListener('focus', (e) => {
+        e.target.parentNode.className = 'focus'
+    });
+    inputCheckbox[i].addEventListener('blur', (e) => {
+        e.target.parentNode.className = 'blur'
+    });
+}
+
+/*Real Time Error Message*/
+userName.addEventListener('keyup', ()=>{
+    isNameValid();
+});
 email.addEventListener('keyup', ()=>{
     isEmailValid();
 });
@@ -229,16 +238,3 @@ zipNum.addEventListener('keyup', ()=>{
 cvvNum.addEventListener('keyup', ()=>{
     isCvvValid();
 })
-
-const inputCheckbox=document.querySelectorAll('input[type="checkbox"]') // list of input tags
-
-
-for (i=0; i< inputCheckbox.length; i++){
-    inputCheckbox[i].addEventListener('focus', (e) => {
-        e.target.parentNode.className = 'focus'
-    });
-    inputCheckbox[i].addEventListener('blur', (e) => {
-        e.target.parentNode.className = 'blur'
-    });
-}
-
