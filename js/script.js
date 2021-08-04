@@ -16,9 +16,7 @@ const defaultCredit = document.querySelector('option[value="credit-card"]')
 
 
 /* Default Focus On Name/Text/Input*/
-function focusNameInput() {
-    document.querySelector("input[name='user-name']").focus();
-};
+document.querySelector("input[name='user-name']").focus();
 
 
 /* Toggle Of 'Other' box based on used selection*/
@@ -111,30 +109,136 @@ paymentMethod.addEventListener('change', (e)=>{
 
 /*Validate Input By User*/ 
 const form = document.querySelector('form');
-const userName = document.getElementById('userName');
-const email = document.getElementById('email');
-const ccnum = document.getElementById('ccnum');
-const zip = document.getElementById('zip');
-const cvv = document.getElementById('cvv');
-const nameHint = document.getElementById('name-hint');
-const emailHint = document.getElementById('email-hint');
-const ccHint = document.getElementById('cc-hint');
-const zipHint = document.getElementById('zip-hint');
-const cvvHint = document.getElementById('cvv-hint');
+const userName = document.getElementById('name');
 
-function isNameValid (userName){
-    return /^[a-z]+$/.test(userName);
+const email = document.getElementById('email');
+const ccnum = document.getElementById('cc-num');
+const zipNum = document.getElementById('zip');
+const cvvNum = document.getElementById('cvv');
+// let nameHint = document.getElementById('name-hint');
+
+
+function isNameValid(){
+    if (userName.value.trim() === ''){
+        userName.parentNode.className = 'not-valid';
+        userName.parentNode.lastElementChild.style.display = 'block'
+        return false;
+    } else {
+        userName.parentNode.className = 'valid'
+        userName.parentNode.lastElementChild.style.display = 'none'
+        return true;
+    }
 }
-function isEmailValid(email) {
-    return /^[^@]+@[^@.]+\.[a-z]+$/i.test(email);
+function isEmailValid() {
+    let validEmail = /^[^@]+@[^@.]+\.[a-z]+$/i.test(email.value)
+    if (!validEmail){
+        email.parentNode.className = 'not-valid'
+        email.parentNode.lastElementChild.style.display = 'block';
+        return false;
+    } else {
+        email.parentNode.className = 'valid'
+        email.parentNode.lastElementChild.style.display = 'none';
+        return true;
+    }
   }
-function isCardNumValid(ccnum){
-    return /^\d{13,16}$/.test(ccnum);
+function isCardNumValid(){
+    let validCardNum = /^\d{13,16}$/.test(ccnum.value)
+    if (!validCardNum){
+        ccnum.parentNode.className = 'not-valid'
+        ccnum.parentNode.lastElementChild.style.display = 'block';
+        return false;
+    } else {
+        ccnum.parentNode.className = 'valid'
+        ccnum.parentNode.lastElementChild.style.display = 'none';
+        return true;
+    }
 }
-function isZipValid(zip){
-    return /^\d{5}$/.test(zip);
+function isZipValid(){
+    let validZip = /^\d{5}$/.test(zipNum.value)
+    if (!validZip){
+        zipNum.parentNode.className = 'not-valid'
+        zipNum.parentNode.lastElementChild.style.display = 'block';
+        return false;
+    } else {
+        zipNum.parentNode.className = 'valid'
+        zipNum.parentNode.lastElementChild.style.display = 'none';
+        return true;
+    }
 }
-function isCvvValid(cvv){
-    return /^\d{3}$/.test(cvv);
+function isCvvValid(){
+    let validCvv = /^\d{3}$/.test(cvvNum.value)
+    if (!validCvv){
+        cvvNum.parentNode.className = 'not-valid'
+        cvvNum.parentNode.lastElementChild.style.display = 'block';
+        return false;
+    } else {
+        cvvNum.parentNode.className = 'valid'
+        cvvNum.parentNode.lastElementChild.style.display = 'none';
+        return true;
+    }
+}
+//const checkBoxHint = document.getElementById('')
+function isAnyActivityRegistered (){
+    if(total === 0){
+        totalCost.className = 'not-valid';
+        totalCost.parentNode.lastElementChild.style.display = 'block';
+        return false;
+    } else{
+        totalCost.className = 'valid';
+        totalCost.parentNode.lastElementChild.style.display = 'none';
+        return true;
+    }
+}
+
+
+/*Prevent Submition if Required Section are Not Filled */
+form.addEventListener('submit', (e)=>{
+    if(!isNameValid()){
+        e.preventDefault()
+    }
+    if(!isEmailValid()){
+        e.preventDefault();
+    }
+    if(!isAnyActivityRegistered()){
+        e.preventDefault();
+    }
+    if(!isCardNumValid()){
+        e.preventDefault();
+    }
+    if(!isZipValid()){
+        e.preventDefault();
+    }
+    if(!isCvvValid()){
+        e.preventDefault();
+    }
+})
+
+/*Turn Key Tab On For All The Boxes*/
+// userName.addEventListener('keyup', ()=>{
+//     isNameValid();
+// });
+email.addEventListener('keyup', ()=>{
+    isEmailValid();
+});
+ccnum.addEventListener('keyup', ()=>{
+    isCardNumValid();
+});
+zipNum.addEventListener('keyup', ()=>{
+    isZipValid();
+});
+cvvNum.addEventListener('keyup', ()=>{
+    isCvvValid();
+})
+
+const inputCheckbox=document.querySelectorAll('input[type="checkbox"]') // list of input tags
+
+
+for (i=0; i< inputCheckbox.length; i++){
+    inputCheckbox[i].addEventListener('focus', (e) => {
+        e.target.parentNode.className = 'focus'
+    });
+    inputCheckbox[i].addEventListener('blur', (e) => {
+        e.target.parentNode.className = 'blur'
+    });
 }
 
