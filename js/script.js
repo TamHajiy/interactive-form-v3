@@ -1,7 +1,6 @@
 const hideOtherInput = document.getElementById('other-job-role');
 const addOtherInput = document.getElementById('title');
 //DOM for t-shirt and color selection
-// const color = document.getElementById('color');
 const design= document.getElementById('design');
 const colorOptions = document.getElementById('color').getElementsByTagName('option')
 //DOM for calculation of cost
@@ -58,6 +57,7 @@ design.addEventListener('change', (e)=>{
             else {
                 colorOptions[i].removeAttribute('hidden');
               }
+              //set color selection display based on design selection
               colorOptions[1].setAttribute('selected', 'selected')
               colorOptions[4].removeAttribute('selected');
         } else if (e.target.value === 'heart js'){
