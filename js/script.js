@@ -54,13 +54,12 @@ design.addEventListener('change', (e)=>{
             'js puns' value, set it to hidden*/
             if(colorOptions[i].getAttribute("data-theme") !== 'js puns'){
                 colorOptions[i].setAttribute('hidden','');
-              
             } 
             else {
                 colorOptions[i].removeAttribute('hidden');
-         
-
               }
+              colorOptions[1].setAttribute('selected', 'selected')
+              colorOptions[4].removeAttribute('selected');
         } else if (e.target.value === 'heart js'){
             /*if an option with 'data-theme' attrb does not match 
             'heart js' value, set it to hidden*/
@@ -70,6 +69,10 @@ design.addEventListener('change', (e)=>{
             else {
                 colorOptions[i].removeAttribute('hidden');
             }
+            colorOptions[4].setAttribute('selected', 'selected')
+            colorOptions[1].removeAttribute('selected');
+
+
         }
     }//endFor
     })//endFunc
