@@ -1,7 +1,7 @@
 const hideOtherInput = document.getElementById('other-job-role');
 const addOtherInput = document.getElementById('title');
 //DOM for t-shirt and color selection
-const color = document.getElementById('color');
+// const color = document.getElementById('color');
 const design= document.getElementById('design');
 const colorOptions = document.getElementById('color').getElementsByTagName('option')
 //DOM for calculation of cost
@@ -48,16 +48,19 @@ design.addEventListener('change', (e)=>{
     color.disabled = false;
 
     //iterate through color options
-    for(var i=1; i < colorOptions.length; i++){
+    for(let i=1; i < colorOptions.length; i++){
         if(e.target.value === 'js puns'){
             /*if an option with 'data-theme' attrb does not match 
             'js puns' value, set it to hidden*/
             if(colorOptions[i].getAttribute("data-theme") !== 'js puns'){
                 colorOptions[i].setAttribute('hidden','');
+              
             } 
             else {
                 colorOptions[i].removeAttribute('hidden');
-            }
+         
+
+              }
         } else if (e.target.value === 'heart js'){
             /*if an option with 'data-theme' attrb does not match 
             'heart js' value, set it to hidden*/
@@ -131,7 +134,7 @@ function isNameValid(){
     }
 }
 function isEmailValid() {
-    let validEmail = /^[^@]+@[^@.]+\.[a-z]+$/i.test(email.value)
+    const validEmail = /^[^@]+@[^@.]+\.[a-z]+$/i.test(email.value)
     if (!validEmail){
         email.parentNode.className = 'not-valid'
         email.parentNode.lastElementChild.style.display = 'block';
@@ -143,7 +146,7 @@ function isEmailValid() {
     }
   }
 function isCardNumValid(){
-    let validCardNum = /^\d{13,16}$/.test(ccnum.value)
+    const validCardNum = /^\d{13,16}$/.test(ccnum.value)
     if (!validCardNum){
         ccnum.parentNode.className = 'not-valid'
         ccnum.parentNode.lastElementChild.style.display = 'block';
@@ -155,7 +158,7 @@ function isCardNumValid(){
     }
 }
 function isZipValid(){
-    let validZip = /^\d{5}$/.test(zipNum.value)
+    const validZip = /^\d{5}$/.test(zipNum.value)
     if (!validZip){
         zipNum.parentNode.className = 'not-valid'
         zipNum.parentNode.lastElementChild.style.display = 'block';
@@ -167,7 +170,7 @@ function isZipValid(){
     }
 }
 function isCvvValid(){
-    let validCvv = /^\d{3}$/.test(cvvNum.value)
+    const validCvv = /^\d{3}$/.test(cvvNum.value)
     if (!validCvv){
         cvvNum.parentNode.className = 'not-valid'
         cvvNum.parentNode.lastElementChild.style.display = 'block';
@@ -202,6 +205,8 @@ form.addEventListener('submit', (e)=>{
     if(!isAnyActivityRegistered()){
         e.preventDefault();
     }
+    //if selected option is credit card, else it wont prevent other options
+    if(e.target === paymentMethod){
     if(!isCardNumValid()){
         e.preventDefault();
     }
@@ -211,10 +216,11 @@ form.addEventListener('submit', (e)=>{
     if(!isCvvValid()){
         e.preventDefault();
     }
+}
 })
 
 /*Focus and blur on input checbox elements*/
-for (i=0; i< inputCheckbox.length; i++){
+for (let i=0; i< inputCheckbox.length; i++){
     inputCheckbox[i].addEventListener('focus', (e) => {
         e.target.parentNode.className = 'focus'
     });
