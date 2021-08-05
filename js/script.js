@@ -58,8 +58,8 @@ design.addEventListener('change', (e)=>{
                 colorOptions[i].removeAttribute('hidden');
               }
               //set color selection display based on design selection
-              colorOptions[1].setAttribute('selected', 'selected')
-              colorOptions[4].removeAttribute('selected');
+                colorOptions[1].setAttribute('selected', 'selected')
+                colorOptions[4].removeAttribute('selected');
         } else if (e.target.value === 'heart js'){
             /*if an option with 'data-theme' attrb does not match 
             'heart js' value, set it to hidden*/
@@ -69,8 +69,8 @@ design.addEventListener('change', (e)=>{
             else {
                 colorOptions[i].removeAttribute('hidden');
             }
-            colorOptions[4].setAttribute('selected', 'selected')
-            colorOptions[1].removeAttribute('selected');
+                colorOptions[4].setAttribute('selected', 'selected')
+                colorOptions[1].removeAttribute('selected');
 
 
         }
