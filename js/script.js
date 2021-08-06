@@ -209,7 +209,7 @@ form.addEventListener('submit', (e)=>{
         e.preventDefault();
     }
     //if selected option is credit card, else it wont prevent other options
-    if(e.target){
+    if(e.target === ccBox){
     if(!isCardNumValid()){
         e.preventDefault();
     }
